@@ -15,6 +15,38 @@
     box-sizing: border-box;
 }
 
+/* Scroll settings */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+html {
+    scroll-padding-top: 100px;
+    /* Custom Scrollbar - Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: #334155 #0f172a;
+}
+
+/* Custom Scrollbar - WebKit (Chrome, Edge, Safari) */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #334155;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #38bdf8;
+}
+
 body {
     background-color: var(--bg-color);
     color: var(--text-body);
