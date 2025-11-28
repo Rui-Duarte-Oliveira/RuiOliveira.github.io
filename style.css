@@ -3,7 +3,7 @@
     --text-heading: #e2e8f0; /* Off-white */
     --text-body: #94a3b8; /* Soft Grey */
     --accent-color: #38bdf8; /* Professional Sky Blue */
-    --card-bg: #1e293b; /* Lighter Slate Grey */
+    --card-bg: rgba(30, 41, 59, 0.7); /* Lighter Slate Grey with transparency for backdrop effects */
     --font-sans: 'Inter', 'Roboto', 'Helvetica Neue', sans-serif;
     --font-mono: 'Courier Prime', 'Fira Code', monospace;
     --border-radius: 12px;
@@ -20,6 +20,22 @@ body {
     color: var(--text-body);
     font-family: var(--font-sans);
     line-height: 1.6;
+    position: relative; /* Context for absolute positioning if needed */
+}
+
+/* Global Noise Texture */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    /* Transparent PNG noise pattern (base64) */
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXVnbGxrBgLEwsKcnJyfm5uqqqqvBgaysrK+vr7Gxsako6Ojo6OdnZ2Xl5eTk5OSkpKOjo6IiIiBhYWAgICAf3+s1k19AAAAn0lEQVR42sXSWQ7AIAhFwZ7Qe9/7X7asQomK0r78QWBmEoJz7h89FlgLhBFy2Fh/rx5nhYx6FwhDcY9gxs5iZ7S6iCNgsSMMkCMbI8YLuWMm275/XZ0O2R6z15rM2QIZuwdCSyDkKCKLkOIIKYYQYwixhBBCiCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQgghhBBCCCGEEEIIIYQQQoj/iB5/NgIkScvngAAAAABJRU5ErkJggg==");
+    opacity: 0.05;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -42,6 +58,57 @@ section {
     padding: 80px 20px;
     max-width: 1200px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1; /* Ensure content is above background */
+}
+
+/* Background Gradients */
+.bg-gradient-circle {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: -2; /* Behind noise (-1) and content (1) */
+}
+
+.circle-1 {
+    top: -10%;
+    right: -10%;
+    width: 600px;
+    height: 600px;
+    background: rgba(76, 29, 149, 0.3); /* Deep Purple */
+}
+
+.circle-2 {
+    bottom: -10%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: rgba(6, 182, 212, 0.2); /* Cyan/Teal */
+}
+
+/* Spotlight Overlay */
+#spotlight-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1; /* Same level as noise? Or slightly above? Let's put it above noise but below content. */
+    /* Wait, body::before is z-index -1. If I put this at -1, order depends on DOM order.
+       In index.html: circles, then spotlight, then content.
+       So:
+       -2: Circles
+       -1: Spotlight
+       -1: Noise (body::before) -> Pseudo elements are usually on top of the element's background but below content.
+       Let's manage z-index carefully.
+       Content is z-index: 1.
+       Spotlight should be 0? Or -1?
+       If noise is on body::before, it's painted before content.
+       I want Spotlight to be visible.
+    */
+    z-index: -1;
+    transition: background 0.1s ease; /* smooth movement */
 }
 
 /* Hero Section */
@@ -50,8 +117,8 @@ section {
     display: flex;
     align-items: center;
     position: relative;
-    /* Subtle radial gradient background */
-    background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 70%);
+    /* Removed the previous radial gradient to let the new global background shine through */
+    background: transparent;
 }
 
 .hero-container {
@@ -98,7 +165,7 @@ section {
 
 /* Code Window Visual */
 .code-window {
-    background-color: #0f172a;
+    background-color: rgba(15, 23, 42, 0.8); /* Semi-transparent */
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     width: 100%;
@@ -106,10 +173,11 @@ section {
     overflow: hidden;
     box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
     font-family: var(--font-mono);
+    backdrop-filter: blur(10px); /* Glass effect for window */
 }
 
 .window-header {
-    background-color: #1e293b;
+    background-color: rgba(30, 41, 59, 0.9);
     padding: 10px 15px;
     display: flex;
     align-items: center;
@@ -193,6 +261,7 @@ section {
     background-color: #0ea5e9; /* Slightly darker blue */
     border-color: #0ea5e9;
     transform: translateY(-2px);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); /* Glow effect */
 }
 
 .btn-secondary {
@@ -229,6 +298,7 @@ section {
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: transform 0.2s ease;
+    backdrop-filter: blur(5px);
 }
 
 .experience-card:hover {
@@ -246,7 +316,7 @@ section {
 
 .experience-image {
     flex: 1;
-    background-color: #0f172a;
+    background-color: rgba(15, 23, 42, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -306,6 +376,7 @@ section {
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
 }
 
 .project-card:hover {
@@ -316,7 +387,7 @@ section {
 
 .project-thumbnail {
     height: 200px;
-    background-color: #0f172a;
+    background-color: rgba(15, 23, 42, 0.5);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -404,7 +475,9 @@ section {
     text-align: center;
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     margin-top: 60px;
-    background-color: var(--bg-color);
+    background-color: transparent; /* Changed from solid bg to let gradient show? Or keep solid? */
+    /* Let's keep it transparent or semi-transparent */
+    background-color: rgba(15, 23, 42, 0.8);
 }
 
 .social-links {
