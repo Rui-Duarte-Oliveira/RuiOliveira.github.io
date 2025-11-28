@@ -1,16 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Typewriter Effect
-    const text = "Gameplay Programmer";
-    const typewriterElement = document.getElementById('typewriter');
-    let index = 0;
+    console.log('Portfolio loaded.');
 
-    function type() {
-        if (index < text.length) {
-            typewriterElement.textContent += text.charAt(index);
-            index++;
-            setTimeout(type, 100);
-        }
-    }
-
-    type();
+    // Any interactive functionality can be added here
+    // For now, the new design is primarily static HTML/CSS
 });
