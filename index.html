@@ -24,26 +24,56 @@
     <main>
         <!-- Hero Section -->
         <section id="hero" class="hero-section">
-            <div class="hero-content">
-                <h1 class="hero-title">Alex Dev</h1>
-                <h2 class="hero-subtitle">Gameplay Programmer & Engine Developer</h2>
-                <p class="hero-bio">
-                    Passionate software engineer with 5 years of experience building immersive gaming experiences.
-                    Specializing in C++, C#, and optimizing robust game systems.
-                </p>
-                <div class="hero-buttons">
-                    <a href="#" class="btn btn-primary">Download Resume</a>
-                    <a href="mailto:email@example.com" class="btn btn-secondary">Contact</a>
+            <div class="hero-container">
+                <div class="hero-text-content hidden">
+                    <h1 class="hero-title">Alex Dev</h1>
+                    <h2 class="hero-subtitle">Gameplay Programmer & Engine Developer</h2>
+                    <p class="hero-bio">
+                        Passionate software engineer with 5 years of experience building immersive gaming experiences.
+                        Specializing in C++, C#, and optimizing robust game systems.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#projects" class="btn btn-primary">View Code</a>
+                        <a href="resume.pdf" target="_blank" class="btn btn-secondary">Resume</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual hidden">
+                    <div class="code-window">
+                        <div class="window-header">
+                            <div class="window-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="filename">PlayerController.cpp</span>
+                        </div>
+                        <div class="window-body">
+<pre><code><span class="keyword">void</span> <span class="type">APlayerController</span>::<span class="function">BeginPlay</span>() {
+    <span class="keyword">Super</span>::BeginPlay();
+
+    <span class="comment">// Initialize core systems</span>
+    <span class="keyword">if</span> (GEngine) {
+        GEngine-><span class="function">AddOnScreenDebugMessage</span>(
+            <span class="number">-1</span>,
+            <span class="number">5.f</span>,
+            <span class="type">FColor</span>::Green,
+            <span class="string">TEXT("System Ready!")</span>
+        );
+    }
+}</code></pre>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
         <!-- Professional Experience (Shipped Titles) -->
         <section id="experience" class="experience-section">
-            <h2 class="section-title">Professional Experience</h2>
+            <h2 class="section-title hidden">Professional Experience</h2>
             <div class="experience-container">
                 <!-- Shipped Title 1 -->
-                <div class="experience-card">
+                <div class="experience-card hidden">
                     <div class="experience-content">
                         <h3 class="exp-title">Galactic Frontier</h3>
                         <h4 class="exp-role">AI Programmer</h4>
@@ -69,7 +99,7 @@
                 </div>
 
                 <!-- Shipped Title 2 -->
-                <div class="experience-card">
+                <div class="experience-card hidden">
                     <div class="experience-content">
                         <h3 class="exp-title">Neon Racer</h3>
                         <h4 class="exp-role">Gameplay Engineer</h4>
@@ -97,10 +127,10 @@
 
         <!-- Personal Projects (GitHub) -->
         <section id="projects" class="projects-section">
-            <h2 class="section-title">Personal Projects</h2>
+            <h2 class="section-title hidden">Personal Projects</h2>
             <div class="projects-grid">
                 <!-- Project 1 -->
-                <div class="project-card">
+                <div class="project-card hidden">
                     <div class="project-thumbnail">
                         <div class="placeholder-img">
                             <i class="fa-solid fa-gamepad"></i>
@@ -114,14 +144,14 @@
                         </div>
                         <p>A fast-paced FPS with procedural generation.</p>
                         <div class="project-links">
-                            <a href="#" class="btn-sm"><i class="fab fa-github"></i> View Source</a>
-                            <a href="#" class="btn-sm"><i class="fa-solid fa-play"></i> Play Demo</a>
+                            <a href="#" class="btn-sm"><i class="fab fa-github"></i> Source Code</a>
+                            <a href="#" class="btn-sm"><i class="fab fa-itch-io"></i> Play Demo</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 2 -->
-                <div class="project-card">
+                <div class="project-card hidden">
                     <div class="project-thumbnail">
                         <div class="placeholder-img">
                             <i class="fa-solid fa-cube"></i>
@@ -135,14 +165,14 @@
                         </div>
                         <p>Custom voxel engine with dynamic lighting.</p>
                         <div class="project-links">
-                            <a href="#" class="btn-sm"><i class="fab fa-github"></i> View Source</a>
-                            <a href="#" class="btn-sm"><i class="fa-solid fa-play"></i> Play Demo</a>
+                            <a href="#" class="btn-sm"><i class="fab fa-github"></i> Source Code</a>
+                            <a href="#" class="btn-sm"><i class="fab fa-itch-io"></i> Play Demo</a>
                         </div>
                     </div>
                 </div>
 
                 <!-- Project 3 -->
-                <div class="project-card">
+                <div class="project-card hidden">
                     <div class="project-thumbnail">
                         <div class="placeholder-img">
                             <i class="fa-solid fa-ghost"></i>
@@ -156,8 +186,8 @@
                         </div>
                         <p>Advanced AI behavior tree implementation.</p>
                         <div class="project-links">
-                            <a href="#" class="btn-sm"><i class="fab fa-github"></i> View Source</a>
-                            <a href="#" class="btn-sm"><i class="fa-solid fa-play"></i> Play Demo</a>
+                            <a href="#" class="btn-sm"><i class="fab fa-github"></i> Source Code</a>
+                            <a href="#" class="btn-sm"><i class="fab fa-itch-io"></i> Play Demo</a>
                         </div>
                     </div>
                 </div>
@@ -166,8 +196,8 @@
 
         <!-- Skills -->
         <section id="skills" class="skills-section">
-            <h2 class="section-title">Skills</h2>
-            <div class="skills-container">
+            <h2 class="section-title hidden">Skills</h2>
+            <div class="skills-container hidden">
                 <div class="skill-category">
                     <h3>Languages</h3>
                     <div class="skill-tags">
